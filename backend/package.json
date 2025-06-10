@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.ts"
   },
+  "prisma": {
+    "seed": "node prisma/seed/index.mjs"
+  },
   "author": "Sachin Sudani",
   "license": "ISC",
   "dependencies": {

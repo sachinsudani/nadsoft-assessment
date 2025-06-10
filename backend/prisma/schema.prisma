@@ -6,3 +6,46 @@ datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
 }
+
+model Student {
+    id        String   @id @default(uuid())
+    firstName String   @map("first_name")
+    lastName  String   @map("last_name")
+    email     String   @unique
+    class     String
+    age       Int
+    marks     Mark[]
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@map("students")
+}
+
+model Subject {
+    id         String   @id @default(uuid())
+    code       String   @unique
+    name       String
+    department String
+    createdAt  DateTime @default(now()) @map("created_at")
+    updatedAt  DateTime @updatedAt @map("updated_at")
+    marks      Mark[]
+
+    @@unique([code, department], name: "unique_subject_code_department")
+    @@map("subjects")
+}
+
+model Mark {
+    id        String   @id @default(uuid())
+    score     Int
+    term      String
+    year      Int
+    student   Student  @relation(fields: [studentId], references: [id])
+    studentId String   @map("student_id")
+    subject   Subject  @relation(fields: [subjectId], references: [id])
+    subjectId String   @map("subject_id")
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([studentId, subjectId, term, year], name: "unique_student_subject_term_year")
+    @@map("marks")
+}

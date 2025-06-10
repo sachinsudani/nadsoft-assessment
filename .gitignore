@@ -131,3 +131,6 @@ dist
 
 # pnpm store
 .pnpm-store/
+
+# migration files
+migrations/
