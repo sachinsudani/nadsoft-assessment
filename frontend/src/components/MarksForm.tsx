@@ -23,25 +23,39 @@ type Props = {
   onSaved: () => void;
 };
 
-export const MarksForm: React.FC<Props> = ({
-  studentId,
-  initialData,
-  onSaved,
-}) => {
+export const MarksForm: React.FC<Props> = ({ studentId, initialData, onSaved }) => {
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [form, setForm] = useState({
-    subjectId: initialData?.subjectId || "",
-    score: initialData?.score ?? 0,
-    term: initialData?.term || "",
-    year: initialData?.year ?? new Date().getFullYear(),
+    subjectId: "",
+    score: 0,
+    term: "",
+    year: new Date().getFullYear(),
   });
-  const [snackbar, setSnackbar] = useState<{
-    open: boolean;
-    message: string;
-    severity: "success" | "error";
-  }>({ open: false, message: "", severity: "success" });
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error",
+  });
   const [loading, setLoading] = useState(false);
   const [subjectsLoading, setSubjectsLoading] = useState(true);
+
+  useEffect(() => {
+    if (initialData) {
+      setForm({
+        subjectId: initialData.subjectId,
+        score: initialData.score,
+        term: initialData.term,
+        year: initialData.year,
+      });
+    } else {
+      setForm({
+        subjectId: "",
+        score: 0,
+        term: "",
+        year: new Date().getFullYear(),
+      });
+    }
+  }, [initialData]);
 
   useEffect(() => {
     setSubjectsLoading(true);
@@ -72,7 +86,7 @@ export const MarksForm: React.FC<Props> = ({
         });
         setSnackbar({
           open: true,
-          message: "Mark updated successfully!",
+          message: "✅ Mark updated successfully!",
           severity: "success",
         });
       } else {
@@ -85,17 +99,19 @@ export const MarksForm: React.FC<Props> = ({
         });
         setSnackbar({
           open: true,
-          message: "Mark added successfully!",
+          message: "✅ Mark added successfully!",
           severity: "success",
         });
+        // Only clear if it's an add
+        setForm({
+          subjectId: "",
+          score: 0,
+          term: "",
+          year: new Date().getFullYear(),
+        });
       }
+
       onSaved();
-      setForm({
-        subjectId: "",
-        score: 0,
-        term: "",
-        year: new Date().getFullYear(),
-      });
     } catch (err: any) {
       let message = "An error occurred.";
       if (err.response && err.response.data) {
@@ -111,17 +127,7 @@ export const MarksForm: React.FC<Props> = ({
   };
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 4,
-        borderRadius: 3,
-        maxWidth: 700,
-        mx: "auto",
-        mt: 3,
-        position: "relative",
-      }}
-    >
+    <Paper elevation={3} sx={{ p: 4, borderRadius: 3, mt: 4, position: "relative" }}>
       {(loading || subjectsLoading) && (
         <Box
           sx={{
@@ -138,13 +144,15 @@ export const MarksForm: React.FC<Props> = ({
           <CircularProgress size={48} />
         </Box>
       )}
+
       <Typography variant="h5" fontWeight={600} mb={2} align="center">
         {initialData ? "Edit Mark" : "Add Mark"}
       </Typography>
+
       <Box component="form" onSubmit={handleSubmit}>
-        <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={3}>
-            <FormControl fullWidth required>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <FormControl fullWidth required size="small">
               <InputLabel>Subject</InputLabel>
               <Select
                 name="subjectId"
@@ -171,12 +179,11 @@ export const MarksForm: React.FC<Props> = ({
               value={form.score}
               onChange={handleChange}
               fullWidth
-              variant="outlined"
-              size="medium"
+              size="small"
             />
           </Grid>
 
-          <Grid item xs={12} sm={2}>
+          <Grid item xs={12} sm={3}>
             <TextField
               required
               name="term"
@@ -184,8 +191,7 @@ export const MarksForm: React.FC<Props> = ({
               value={form.term}
               onChange={handleChange}
               fullWidth
-              variant="outlined"
-              size="medium"
+              size="small"
             />
           </Grid>
 
@@ -198,36 +204,32 @@ export const MarksForm: React.FC<Props> = ({
               value={form.year}
               onChange={handleChange}
               fullWidth
-              variant="outlined"
-              size="medium"
+              size="small"
             />
           </Grid>
 
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={1}>
             <Button
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ borderRadius: 2, py: 1.2, fontWeight: 600 }}
+              sx={{ fontWeight: 600 }}
               disabled={loading || subjectsLoading}
             >
-              {initialData ? "Update Mark" : "Add Mark"}
+              {initialData ? "Update" : "Add"}
             </Button>
           </Grid>
         </Grid>
       </Box>
+
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert
-          severity={snackbar.severity}
-          sx={{ width: "100%" }}
-          variant="filled"
-        >
+        <Alert severity={snackbar.severity} sx={{ width: "100%" }} variant="filled">
           {snackbar.message}
         </Alert>
       </Snackbar>
