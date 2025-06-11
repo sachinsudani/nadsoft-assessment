@@ -1,6 +1,8 @@
 import {
   Alert,
   Button,
+  CircularProgress,
+  Box,
   Container,
   Dialog,
   DialogActions,
@@ -82,7 +84,9 @@ const StudentDetailPage: React.FC = () => {
   if (!student)
     return (
       <Container>
-        <Typography>Loading…</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300 }}>
+          <CircularProgress size={48} />
+        </Box>
       </Container>
     );
 

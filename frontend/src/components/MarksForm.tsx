@@ -2,6 +2,7 @@ import {
   Alert,
   Box,
   Button,
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -39,12 +40,16 @@ export const MarksForm: React.FC<Props> = ({
     message: string;
     severity: "success" | "error";
   }>({ open: false, message: "", severity: "success" });
+  const [loading, setLoading] = useState(false);
+  const [subjectsLoading, setSubjectsLoading] = useState(true);
 
   useEffect(() => {
+    setSubjectsLoading(true);
     api
       .get("/subject?page=1&limit=100")
       .then((res) => setSubjects(res.data.data))
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setSubjectsLoading(false));
   }, []);
 
   const handleChange = (e: any) => {
@@ -57,6 +62,7 @@ export const MarksForm: React.FC<Props> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (initialData) {
         await api.put(`/mark/${initialData.id}`, {
@@ -99,14 +105,39 @@ export const MarksForm: React.FC<Props> = ({
           message;
       }
       setSnackbar({ open: true, message, severity: "error" });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Paper
       elevation={3}
-      sx={{ p: 4, borderRadius: 3, maxWidth: 700, mx: "auto", mt: 3 }}
+      sx={{
+        p: 4,
+        borderRadius: 3,
+        maxWidth: 700,
+        mx: "auto",
+        mt: 3,
+        position: "relative",
+      }}
     >
+      {(loading || subjectsLoading) && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 10,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            bgcolor: "rgba(255,255,255,0.6)",
+            borderRadius: 3,
+          }}
+        >
+          <CircularProgress size={48} />
+        </Box>
+      )}
       <Typography variant="h5" fontWeight={600} mb={2} align="center">
         {initialData ? "Edit Mark" : "Add Mark"}
       </Typography>
@@ -179,6 +210,7 @@ export const MarksForm: React.FC<Props> = ({
               color="primary"
               fullWidth
               sx={{ borderRadius: 2, py: 1.2, fontWeight: 600 }}
+              disabled={loading || subjectsLoading}
             >
               {initialData ? "Update Mark" : "Add Mark"}
             </Button>

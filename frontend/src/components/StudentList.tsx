@@ -17,6 +17,8 @@ import {
   TableHead,
   TableRow,
   Typography,
+  CircularProgress,
+  Box,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,16 +33,23 @@ const StudentList: React.FC = () => {
     severity?: "success" | "error";
   }>({ open: false, message: "" });
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
   const navigate = useNavigate();
 
-  const load = async () => {
-    const res = await api.get("/student?page=1&limit=10");
+  const load = async (pageNum = 1) => {
+    setLoading(true);
+    const res = await api.get(`/student?page=${pageNum}&limit=${limit}`);
     setStudents(res.data.data);
+    setTotalPages(Math.ceil(res.data.count / limit) || 1);
+    setLoading(false);
   };
 
   useEffect(() => {
-    load();
-  }, []);
+    load(page);
+  }, [page]);
 
   const handleDelete = async () => {
     if (!deleteId) return;
@@ -51,7 +60,7 @@ const StudentList: React.FC = () => {
         message: "Student deleted successfully!",
         severity: "success",
       });
-      load();
+      load(page);
     } catch (err) {
       setSnackbar({
         open: true,
@@ -64,79 +73,115 @@ const StudentList: React.FC = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={2}
-        >
-          <Typography variant="h4" fontWeight={600}>
-            Students
-          </Typography>
-          <Button
-            variant="contained"
-            onClick={() => navigate("/create")}
-            sx={{ borderRadius: 2, fontWeight: 600 }}
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300 }}>
+          <CircularProgress size={48} />
+        </Box>
+      ) : (
+        <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            mb={2}
           >
-            + Add Student
-          </Button>
-        </Stack>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {["Name", "Email", "Class", "Age", "Actions"].map((h) => (
-                  <TableCell key={h}>
-                    <strong>{h}</strong>
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {students.map((s) => (
-                <TableRow key={s.id}>
-                  <TableCell>
-                    {s.firstName} {s.lastName}
-                  </TableCell>
-                  <TableCell>{s.email}</TableCell>
-                  <TableCell>{s.class}</TableCell>
-                  <TableCell>{s.age}</TableCell>
-                  <TableCell>
-                    <Stack direction="row" spacing={1}>
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={() => navigate(`/students/${s.id}`)}
-                        sx={{ borderRadius: 2 }}
-                      >
-                        View
-                      </Button>
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={() => navigate(`/edit/${s.id}`)}
-                        sx={{ borderRadius: 2 }}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        size="small"
-                        color="error"
-                        variant="outlined"
-                        onClick={() => setDeleteId(s.id)}
-                        sx={{ borderRadius: 2 }}
-                      >
-                        Delete
-                      </Button>
-                    </Stack>
-                  </TableCell>
+            <Typography variant="h4" fontWeight={600}>
+              Students
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => navigate("/create")}
+              sx={{ borderRadius: 2, fontWeight: 600 }}
+            >
+              + Add Student
+            </Button>
+          </Stack>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {["Name", "Email", "Class", "Age", "Actions"].map((h) => (
+                    <TableCell key={h}>
+                      <strong>{h}</strong>
+                    </TableCell>
+                  ))}
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
+              </TableHead>
+              <TableBody>
+                {students.map((s) => (
+                  <TableRow key={s.id}>
+                    <TableCell>
+                      {s.firstName} {s.lastName}
+                    </TableCell>
+                    <TableCell>{s.email}</TableCell>
+                    <TableCell>{s.class}</TableCell>
+                    <TableCell>{s.age}</TableCell>
+                    <TableCell>
+                      <Stack direction="row" spacing={1}>
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => navigate(`/students/${s.id}`)}
+                          sx={{ borderRadius: 2 }}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => navigate(`/edit/${s.id}`)}
+                          sx={{ borderRadius: 2 }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          size="small"
+                          color="error"
+                          variant="outlined"
+                          onClick={() => setDeleteId(s.id)}
+                          sx={{ borderRadius: 2 }}
+                        >
+                          Delete
+                        </Button>
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Stack direction="row" spacing={2} justifyContent="center" mt={3}>
+            <Button
+              variant="outlined"
+              onClick={() => setPage(1)}
+              disabled={page === 1}
+            >
+              First
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+            >
+              Next
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => setPage(totalPages)}
+              disabled={page === totalPages}
+            >
+              Last
+            </Button>
+          </Stack>
+        </Paper>
+      )}
       <Snackbar
         open={snackbar.open}
         autoHideDuration={3000}

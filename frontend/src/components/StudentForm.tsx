@@ -2,6 +2,7 @@ import {
   Alert,
   Box,
   Button,
+  CircularProgress,
   Paper,
   Snackbar,
   TextField,
@@ -81,8 +82,13 @@ const StudentForm: React.FC<StudentFormProps> = ({
   return (
     <Paper
       elevation={3}
-      sx={{ p: 4, borderRadius: 3, maxWidth: 500, mx: "auto" }}
+      sx={{ p: 4, borderRadius: 3, maxWidth: 500, mx: "auto", position: 'relative' }}
     >
+      {loading && (
+        <Box sx={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', justifyContent: 'center', alignItems: 'center', bgcolor: 'rgba(255,255,255,0.6)', borderRadius: 3 }}>
+          <CircularProgress size={48} />
+        </Box>
+      )}
       <Typography variant="h5" fontWeight={600} mb={2} align="center">
         Student Information
       </Typography>
