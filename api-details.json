@@ -1,0 +1,264 @@
+{
+  "studentsApis": [
+    {
+      "method": "POST",
+      "url": "http://localhost:3000/api/v1/student",
+      "body": {
+        "firstName": "Krupali",
+        "lastName": "Ajudiya",
+        "email": "krupali@gmial.com",
+        "class": "8C",
+        "age": 13
+      },
+      "response": {
+        "success": true,
+        "data": {
+          "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+          "firstName": "Krupali",
+          "lastName": "Ajudiya",
+          "email": "krupali@gmial.com",
+          "class": "8C",
+          "age": 13,
+          "createdAt": "2025-06-11T05:49:43.030Z",
+          "updatedAt": "2025-06-11T05:49:43.030Z"
+        },
+        "message": "Student added successfully"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/v1/student?page=1&limit=5",
+      "body": {},
+      "params": {
+        "page": "1",
+        "limit": "5"
+      },
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+            "firstName": "Krupali",
+            "lastName": "Ajudiya",
+            "email": "krupali@gmial.com",
+            "class": "8C",
+            "age": 13,
+            "createdAt": "2025-06-11T05:49:43.030Z",
+            "updatedAt": "2025-06-11T05:49:43.030Z"
+          },
+          {
+            "id": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+            "firstName": "Sachin",
+            "lastName": "Sudani",
+            "email": "sachin@gmial.com",
+            "class": "10B",
+            "age": 15,
+            "createdAt": "2025-06-10T13:02:14.848Z",
+            "updatedAt": "2025-06-10T13:02:14.848Z"
+          }
+        ],
+        "count": 2,
+        "message": "Students retrieved successfully"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/v1/student/8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+      "body": {},
+      "params": {
+        "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd"
+      },
+      "response": {
+        "success": true,
+        "data": {
+          "id": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+          "firstName": "Sachin",
+          "lastName": "Sudani",
+          "email": "sachin@gmial.com",
+          "class": "10B",
+          "age": 15,
+          "createdAt": "2025-06-10T13:02:14.848Z",
+          "updatedAt": "2025-06-10T13:02:14.848Z",
+          "marks": [
+            {
+              "id": "b11f7e6a-0705-487f-86c6-5dae3fbd4f82",
+              "score": 98,
+              "term": "First",
+              "year": 2024,
+              "studentId": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+              "subjectId": "af2f55bb-b2b5-4b38-b13e-314e5803414b",
+              "createdAt": "2025-06-11T05:58:48.164Z",
+              "updatedAt": "2025-06-11T06:15:13.070Z",
+              "subject": {
+                "id": "af2f55bb-b2b5-4b38-b13e-314e5803414b",
+                "code": "MATH101",
+                "name": "Mathematics",
+                "department": "Science",
+                "createdAt": "2025-06-10T12:09:38.841Z",
+                "updatedAt": "2025-06-10T12:09:38.841Z"
+              }
+            },
+            {
+              "id": "6cfddba7-000e-47bb-a6c7-f7f4f8321d71",
+              "score": 100,
+              "term": "Second",
+              "year": 2024,
+              "studentId": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+              "subjectId": "cf289c17-b008-4ba4-b2a0-a375a06892c0",
+              "createdAt": "2025-06-11T06:05:45.484Z",
+              "updatedAt": "2025-06-11T06:16:20.547Z",
+              "subject": {
+                "id": "cf289c17-b008-4ba4-b2a0-a375a06892c0",
+                "code": "ECO101",
+                "name": "Economics",
+                "department": "Commerce",
+                "createdAt": "2025-06-10T12:09:38.841Z",
+                "updatedAt": "2025-06-10T12:09:38.841Z"
+              }
+            }
+          ]
+        },
+        "message": "Student retrieved successfully"
+      }
+    },
+    {
+      "method": "PUT",
+      "url": "http://localhost:3000/api/v1/student/8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+      "body": {
+        "firstName": "Bhavik",
+        "lastName": "Mungra",
+        "email": "bhavik@gmial.com",
+        "class": "8A",
+        "age": 13
+      },
+      "params": {
+        "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd"
+      },
+      "response": {
+        "success": true,
+        "data": {
+          "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+          "firstName": "Krupali",
+          "lastName": "Ajudiya",
+          "email": "krupali@gmial.com",
+          "class": "8C",
+          "age": 13,
+          "createdAt": "2025-06-11T05:49:43.030Z",
+          "updatedAt": "2025-06-11T05:49:43.030Z"
+        },
+        "message": "Student updated successfully"
+      }
+    },
+    {
+      "method": "DELETE",
+      "url": "http://localhost:3000/api/v1/student/8c0915ff-e9e7-42fb-96bd-8c66798c46dd",
+      "body": {},
+      "params": {
+        "id": "8c0915ff-e9e7-42fb-96bd-8c66798c46dd"
+      },
+      "response": {},
+      "status": 204,
+      "statusText": "No Content"
+    }
+  ],
+  "subjectsApis": [
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/v1/subject?page=2&limit=5",
+      "body": {},
+      "params": {
+        "page": "2",
+        "limit": "5"
+      },
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": "36aa512d-4a0a-45dd-9ec1-dc981737fdf6",
+            "code": "GEOG101",
+            "name": "Geography",
+            "department": "Arts",
+            "createdAt": "2025-06-10T12:09:38.841Z",
+            "updatedAt": "2025-06-10T12:09:38.841Z"
+          },
+          {
+            "id": "af2f55bb-b2b5-4b38-b13e-314e5803414b",
+            "code": "MATH101",
+            "name": "Mathematics",
+            "department": "Science",
+            "createdAt": "2025-06-10T12:09:38.841Z",
+            "updatedAt": "2025-06-10T12:09:38.841Z"
+          },
+          {
+            "id": "ddcc8fab-5589-4e1d-b068-ed7f3f69dc1a",
+            "code": "CHEM101",
+            "name": "Chemistry",
+            "department": "Science",
+            "createdAt": "2025-06-10T12:09:38.841Z",
+            "updatedAt": "2025-06-10T12:09:38.841Z"
+          },
+          {
+            "id": "aa18714d-fef6-4bda-9b53-f0e36826991c",
+            "code": "BIO101",
+            "name": "Biology",
+            "department": "Science",
+            "createdAt": "2025-06-10T12:09:38.841Z",
+            "updatedAt": "2025-06-10T12:09:38.841Z"
+          }
+        ],
+        "count": 9,
+        "message": "Subjects retrieved successfully"
+      }
+    }
+  ],
+  "marksApis": [
+    {
+      "method": "POST",
+      "url": "http://localhost:3000/api/v1/mark",
+      "body": {
+        "score": 98,
+        "term": "First",
+        "year": 2024,
+        "studentId": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+        "subjectId": "af2f55bb-b2b5-4b38-b13e-314e5803414b"
+      },
+      "response": {
+        "success": true,
+        "data": {
+          "id": "b11f7e6a-0705-487f-86c6-5dae3fbd4f82",
+          "score": 98,
+          "term": "First",
+          "year": 2024,
+          "studentId": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+          "subjectId": "af2f55bb-b2b5-4b38-b13e-314e5803414b",
+          "createdAt": "2025-06-11T05:58:48.164Z",
+          "updatedAt": "2025-06-11T06:15:13.070Z"
+        },
+        "message": "Mark added successfully"
+      }
+    },
+    {
+      "method": "PUT",
+      "url": "http://localhost:3000/api/v1/mark/b11f7e6a-0705-487f-86c6-5dae3fbd4f82",
+      "body": {
+        "score": 100,
+        "term": "Second",
+        "year": 2024
+      },
+      "response": {
+        "success": true,
+        "data": {
+          "id": "b11f7e6a-0705-487f-86c6-5dae3fbd4f82",
+          "score": 100,
+          "term": "Second",
+          "year": 2024,
+          "studentId": "7a5f720c-1aea-43eb-b228-4ffdf69ce494",
+          "subjectId": "af2f55bb-b2b5-4b38-b13e-314e5803414b",
+          "createdAt": "2025-06-11T05:58:48.164Z",
+          "updatedAt": "2025-06-11T06:15:13.070Z"
+        },
+        "message": "Mark updated successfully"
+      }
+    }
+  ]
+}
