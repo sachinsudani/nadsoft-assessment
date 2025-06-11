@@ -5,7 +5,7 @@ import { ApiResponse } from "../../../utils/ApiResponse";
 import { asyncHandler } from "../../../utils/asyncHandler";
 import { listStudentValidator } from "./validators/list.student.validator";
 
-const listStudent: RequestHandler = asyncHandler(async (req, res) => {
+const listStudents: RequestHandler = asyncHandler(async (req, res) => {
     const query = listStudentValidator.parse({
         page: +req.query.page,
         limit: +req.query.limit
@@ -22,7 +22,9 @@ const listStudent: RequestHandler = asyncHandler(async (req, res) => {
         prisma.student.count()
     ]);
 
-    res.status(HttpStatus.OK).json(new ApiResponse(HttpStatus.OK, students, "Students retrieved successfully", count));
+    res
+        .status(HttpStatus.OK)
+        .json(new ApiResponse(HttpStatus.OK, students, "Students retrieved successfully", count));
 });
 
-export { listStudent };
+export { listStudents };

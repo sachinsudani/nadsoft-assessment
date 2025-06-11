@@ -18,7 +18,9 @@ const addStudent: RequestHandler = asyncHandler(async (req, res) => {
         },
     });
 
-    res.status(HttpStatus.CREATED).json(new ApiResponse(HttpStatus.CREATED, student, "Student added successfully"));
+    res
+        .status(HttpStatus.CREATED)
+        .json(new ApiResponse(HttpStatus.CREATED, student, "Student added successfully"));
 });
 
 export { addStudent };

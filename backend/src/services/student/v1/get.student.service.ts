@@ -6,18 +6,20 @@ import { ApiResponse } from "../../../utils/ApiResponse";
 import { asyncHandler } from "../../../utils/asyncHandler";
 import { getStudentValidator } from "./validators/get.student.validator";
 
-const getStudent: RequestHandler = asyncHandler(async (req, res) => {
-    const studentId = getStudentValidator.parse(req.params);
+const getStudentById: RequestHandler = asyncHandler(async (req, res) => {
+    const { id: studentId } = getStudentValidator.parse(req.params);
 
-    const student = await prisma.student.findUnique({ where: { id: studentId.id }, include: { marks: { include: { subject: true } } } });
+    const student = await prisma.student.findUnique({ where: { id: studentId }, include: { marks: { include: { subject: true } } } });
 
     if (!student) {
         throw new ApiError(HttpStatus.NOT_FOUND, "Student not found");
     }
 
-    res.status(HttpStatus.OK).json(new ApiResponse(HttpStatus.OK, student, "Student retrieved successfully"));
+    res
+        .status(HttpStatus.OK)
+        .json(new ApiResponse(HttpStatus.OK, student, "Student retrieved successfully"));
 
 });
 
-export { getStudent };
+export { getStudentById };
 
