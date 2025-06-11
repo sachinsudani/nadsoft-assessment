@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "2b4f48d5-4fce-43b3-8af2-88e82df6bcc4",
+		"_postman_id": "1887b385-af32-44a9-a6fb-92036ed3a9b1",
 		"name": "Student-Management",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34844805",
-		"_collection_link": "https://xenett.postman.co/workspace/Team-Workspace~1af8c667-5f02-4837-8109-f2745272fe55/collection/34844805-2b4f48d5-4fce-43b3-8af2-88e82df6bcc4?action=share&source=collection_link&creator=34844805"
+		"_collection_link": "https://xenett.postman.co/workspace/Team-Workspace~1af8c667-5f02-4837-8109-f2745272fe55/collection/34844805-1887b385-af32-44a9-a6fb-92036ed3a9b1?action=share&source=collection_link&creator=34844805"
 	},
 	"item": [
 		{
@@ -40,7 +40,7 @@
 					},
 					"response": [
 						{
-							"name": "New Request",
+							"name": "response",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -159,12 +159,15 @@
 				},
 				{
 					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Krupali\",\r\n    \"lastName\": \"Ajudiya\",\r\n    \"email\": \"krupali@gmial.com\",\r\n    \"class\": \"8C\",\r\n    \"age\": 13\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,7 +175,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/student",
+							"raw": "http://localhost:3000/api/v1/student?page=1&limit=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -182,6 +185,16 @@
 								"api",
 								"v1",
 								"student"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -191,17 +204,8 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Krupali\",\r\n    \"lastName\": \"Ajudiya\",\r\n    \"email\": \"krupali@gmial.com\",\r\n    \"class\": \"8C\",\r\n    \"age\": 13\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/student?page=1&limit=3",
+									"raw": "http://localhost:3000/api/v1/student?page=1&limit=5",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -219,7 +223,7 @@
 										},
 										{
 											"key": "limit",
-											"value": "3"
+											"value": "5"
 										}
 									]
 								}
@@ -316,12 +320,15 @@
 				},
 				{
 					"name": "Get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Krupali\",\r\n    \"lastName\": \"Ajudiya\",\r\n    \"email\": \"krupali@gmial.com\",\r\n    \"class\": \"8C\",\r\n    \"age\": 13\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -329,7 +336,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/student",
+							"raw": "http://localhost:3000/api/v1/student/7a5f720c-1aea-43eb-b228-4ffdf69ce494",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -338,11 +345,1053 @@
 							"path": [
 								"api",
 								"v1",
-								"student"
+								"student",
+								"7a5f720c-1aea-43eb-b228-4ffdf69ce494"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/student/34d61797-f31a-49db-8a5a-fc311bb91736",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"student",
+										"34d61797-f31a-49db-8a5a-fc311bb91736"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "286"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11e-E4OJqXO1xFkObCXrPRUg/udYGf8\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 05:04:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"34d61797-f31a-49db-8a5a-fc311bb91736\",\n        \"firstName\": \"Raj\",\n        \"lastName\": \"Ramani\",\n        \"email\": \"raj@gmial.com\",\n        \"class\": \"12A\",\n        \"age\": 17,\n        \"createdAt\": \"2025-06-10T13:04:54.601Z\",\n        \"updatedAt\": \"2025-06-10T13:04:54.601Z\",\n        \"marks\": []\n    },\n    \"message\": \"Student retrieved successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Bhavik\",\r\n    \"lastName\": \"Mungra\",\r\n    \"email\": \"bhavik@gmial.com\",\r\n    \"class\": \"8A\",\r\n    \"age\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/student/c5d1238f-0abb-4d0d-a1bf-516b90c96eb6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"c5d1238f-0abb-4d0d-a1bf-516b90c96eb6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"Bhavik\",\r\n    \"lastName\": \"Mungra\",\r\n    \"email\": \"bhavik@gmial.com\",\r\n    \"class\": \"8A\",\r\n    \"age\": 13\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/student/c5d1238f-0abb-4d0d-a1bf-516b90c96eb6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"student",
+										"c5d1238f-0abb-4d0d-a1bf-516b90c96eb6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "278"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"116-zU3uu4z5Tva//js2V5UgCqiiXxQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 05:47:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"c5d1238f-0abb-4d0d-a1bf-516b90c96eb6\",\n        \"firstName\": \"Bhavik\",\n        \"lastName\": \"Mungra\",\n        \"email\": \"bhavik@gmial.com\",\n        \"class\": \"8A\",\n        \"age\": 13,\n        \"createdAt\": \"2025-06-10T13:06:01.446Z\",\n        \"updatedAt\": \"2025-06-11T05:47:44.083Z\"\n    },\n    \"message\": \"Student updated successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/student/c5d1238f-0abb-4d0d-a1bf-516b90c96eb6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"student",
+								"c5d1238f-0abb-4d0d-a1bf-516b90c96eb6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/student/c5d1238f-0abb-4d0d-a1bf-516b90c96eb6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"student",
+										"c5d1238f-0abb-4d0d-a1bf-516b90c96eb6"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "222"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"de-0FbhhXo4w8uMltTo35LCpqcH0mk\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 13:27:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"success\": false,\n    \"errors\": [],\n    \"message\": \"Student not found\",\n    \"stack\": \"Error: Student not found\\n    at E:\\\\Projects\\\\nadsoft-assessment\\\\backend\\\\src\\\\services\\\\student\\\\v1\\\\delete.student.service.ts:15:15\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "mark",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\r\n    \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\r\n    \"score\": 98,\r\n    \"term\": \"First\",\r\n    \"year\": 2025\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/mark",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"mark"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\r\n    \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\r\n    \"score\": 98,\r\n    \"term\": \"First\",\r\n    \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/mark",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"mark"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "323"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"143-pp42JVxm3gPQAnlMSOlzymM+Gbc\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 06:05:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"6cfddba7-000e-47bb-a6c7-f7f4f8321d71\",\n        \"score\": 98,\n        \"term\": \"First\",\n        \"year\": 2025,\n        \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\n        \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\n        \"createdAt\": \"2025-06-11T06:05:45.484Z\",\n        \"updatedAt\": \"2025-06-11T06:05:45.484Z\"\n    },\n    \"message\": \"Mark added successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score\": 100,\r\n    \"term\": \"Second\",\r\n    \"year\": 2024\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/mark/6cfddba7-000e-47bb-a6c7-f7f4f8321d71",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"mark",
+								"6cfddba7-000e-47bb-a6c7-f7f4f8321d71"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"score\": 100,\r\n    \"term\": \"Second\",\r\n    \"year\": 2024\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/mark/6cfddba7-000e-47bb-a6c7-f7f4f8321d71",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"mark",
+										"6cfddba7-000e-47bb-a6c7-f7f4f8321d71"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "327"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"147-dfOxI6HJMf++9VB6s4hlqf2ZxU8\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 06:16:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"6cfddba7-000e-47bb-a6c7-f7f4f8321d71\",\n        \"score\": 100,\n        \"term\": \"Second\",\n        \"year\": 2024,\n        \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\n        \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\n        \"createdAt\": \"2025-06-11T06:05:45.484Z\",\n        \"updatedAt\": \"2025-06-11T06:16:20.547Z\"\n    },\n    \"message\": \"Mark updated successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/mark/6cfddba7-000e-47bb-a6c7-f7f4f8321d71",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"mark",
+								"6cfddba7-000e-47bb-a6c7-f7f4f8321d71"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/mark/6cfddba7-000e-47bb-a6c7-f7f4f8321d71",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"mark",
+										"6cfddba7-000e-47bb-a6c7-f7f4f8321d71"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d2-ILIj7cgTOCQwxagQxlagqaYwlDw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 12:48:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"success\": false,\n    \"errors\": [],\n    \"message\": \"Mark not found\",\n    \"stack\": \"Error: Mark not found\\n    at E:\\\\Projects\\\\nadsoft-assessment\\\\backend\\\\src\\\\services\\\\mark\\\\v1\\\\delete.mark.service.ts:15:15\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "subject",
+			"item": [
+				{
+					"name": "List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\r\n    \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\r\n    \"score\": 98,\r\n    \"term\": \"First\",\r\n    \"year\": 2025\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/subject?page=2&limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"subject"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentId\": \"7a5f720c-1aea-43eb-b228-4ffdf69ce494\",\r\n    \"subjectId\": \"cf289c17-b008-4ba4-b2a0-a375a06892c0\",\r\n    \"score\": 98,\r\n    \"term\": \"First\",\r\n    \"year\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/subject?page=2&limit=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"subject"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "807"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"327-/5xuPT+wlHrxbpDNnQGt4EeuVoU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jun 2025 06:24:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"36aa512d-4a0a-45dd-9ec1-dc981737fdf6\",\n            \"code\": \"GEOG101\",\n            \"name\": \"Geography\",\n            \"department\": \"Arts\",\n            \"createdAt\": \"2025-06-10T12:09:38.841Z\",\n            \"updatedAt\": \"2025-06-10T12:09:38.841Z\"\n        },\n        {\n            \"id\": \"af2f55bb-b2b5-4b38-b13e-314e5803414b\",\n            \"code\": \"MATH101\",\n            \"name\": \"Mathematics\",\n            \"department\": \"Science\",\n            \"createdAt\": \"2025-06-10T12:09:38.841Z\",\n            \"updatedAt\": \"2025-06-10T12:09:38.841Z\"\n        },\n        {\n            \"id\": \"ddcc8fab-5589-4e1d-b068-ed7f3f69dc1a\",\n            \"code\": \"CHEM101\",\n            \"name\": \"Chemistry\",\n            \"department\": \"Science\",\n            \"createdAt\": \"2025-06-10T12:09:38.841Z\",\n            \"updatedAt\": \"2025-06-10T12:09:38.841Z\"\n        },\n        {\n            \"id\": \"aa18714d-fef6-4bda-9b53-f0e36826991c\",\n            \"code\": \"BIO101\",\n            \"name\": \"Biology\",\n            \"department\": \"Science\",\n            \"createdAt\": \"2025-06-10T12:09:38.841Z\",\n            \"updatedAt\": \"2025-06-10T12:09:38.841Z\"\n        }\n    ],\n    \"count\": 9,\n    \"message\": \"Subjects retrieved successfully\"\n}"
+						}
+					]
 				}
 			]
 		}

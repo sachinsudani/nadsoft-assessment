@@ -1,13 +1,14 @@
-import React from "react";
-import type { Mark } from "../types";
 import {
+  Button,
+  Stack,
   Table,
+  TableBody,
+  TableCell,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
-  Button,
 } from "@mui/material";
+import React from "react";
+import type { Mark } from "../types";
 
 type MarksListProps = {
   marks: Mark[];
@@ -36,12 +37,25 @@ export const MarksList: React.FC<MarksListProps> = ({
           <TableCell>{m.term}</TableCell>
           <TableCell>{m.year}</TableCell>
           <TableCell>
-            <Button size="small" onClick={() => onEdit(m)}>
-              Edit
-            </Button>
-            <Button size="small" color="error" onClick={() => onDelete(m.id)}>
-              Delete
-            </Button>
+            <Stack direction="row" spacing={1}>
+              <Button
+                size="small"
+                variant="outlined"
+                onClick={() => onEdit(m)}
+                sx={{ borderRadius: 2 }}
+              >
+                Edit
+              </Button>
+              <Button
+                size="small"
+                color="error"
+                variant="outlined"
+                onClick={() => onDelete(m.id)}
+                sx={{ borderRadius: 2 }}
+              >
+                Delete
+              </Button>
+            </Stack>
           </TableCell>
         </TableRow>
       ))}

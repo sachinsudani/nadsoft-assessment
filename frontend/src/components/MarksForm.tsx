@@ -1,10 +1,15 @@
 import {
+  Alert,
+  Box,
   Button,
   FormControl,
   InputLabel,
   MenuItem,
+  Paper,
   Select,
+  Snackbar,
   TextField,
+  Typography,
 } from "@mui/material";
 import Grid from "@mui/material/GridLegacy";
 import React, { useEffect, useState } from "react";
@@ -29,6 +34,11 @@ export const MarksForm: React.FC<Props> = ({
     term: initialData?.term || "",
     year: initialData?.year ?? new Date().getFullYear(),
   });
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({ open: false, message: "", severity: "success" });
 
   useEffect(() => {
     api
@@ -54,6 +64,11 @@ export const MarksForm: React.FC<Props> = ({
           term: form.term,
           year: form.year,
         });
+        setSnackbar({
+          open: true,
+          message: "Mark updated successfully!",
+          severity: "success",
+        });
       } else {
         await api.post("/mark", {
           studentId,
@@ -61,6 +76,11 @@ export const MarksForm: React.FC<Props> = ({
           score: form.score,
           term: form.term,
           year: form.year,
+        });
+        setSnackbar({
+          open: true,
+          message: "Mark added successfully!",
+          severity: "success",
         });
       }
       onSaved();
@@ -70,74 +90,115 @@ export const MarksForm: React.FC<Props> = ({
         term: "",
         year: new Date().getFullYear(),
       });
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      let message = "An error occurred.";
+      if (err.response && err.response.data) {
+        message =
+          err.response.data.message ||
+          (err.response.data.errors && err.response.data.errors.join(", ")) ||
+          message;
+      }
+      setSnackbar({ open: true, message, severity: "error" });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid xs={12} sm={3}>
-          <FormControl fullWidth required>
-            <InputLabel>Subject</InputLabel>
-            <Select
-              name="subjectId"
-              value={form.subjectId}
+    <Paper
+      elevation={3}
+      sx={{ p: 4, borderRadius: 3, maxWidth: 700, mx: "auto", mt: 3 }}
+    >
+      <Typography variant="h5" fontWeight={600} mb={2} align="center">
+        {initialData ? "Edit Mark" : "Add Mark"}
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={12} sm={3}>
+            <FormControl fullWidth required>
+              <InputLabel>Subject</InputLabel>
+              <Select
+                name="subjectId"
+                value={form.subjectId}
+                onChange={handleChange}
+                label="Subject"
+              >
+                {subjects.map((s) => (
+                  <MenuItem key={s.id} value={s.id}>
+                    {s.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={2}>
+            <TextField
+              required
+              name="score"
+              label="Score"
+              type="number"
+              inputProps={{ step: "0.01" }}
+              value={form.score}
               onChange={handleChange}
-              label="Subject"
+              fullWidth
+              variant="outlined"
+              size="medium"
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={2}>
+            <TextField
+              required
+              name="term"
+              label="Term"
+              value={form.term}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              size="medium"
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={2}>
+            <TextField
+              required
+              name="year"
+              label="Year"
+              type="number"
+              value={form.year}
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              size="medium"
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ borderRadius: 2, py: 1.2, fontWeight: 600 }}
             >
-              {subjects.map((s) => (
-                <MenuItem key={s.id} value={s.id}>
-                  {s.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+              {initialData ? "Update Mark" : "Add Mark"}
+            </Button>
+          </Grid>
         </Grid>
-
-        <Grid xs={12} sm={2}>
-          <TextField
-            required
-            name="score"
-            label="Score"
-            type="number"
-            inputProps={{ step: "0.01" }}
-            value={form.score}
-            onChange={handleChange}
-            fullWidth
-          />
-        </Grid>
-
-        <Grid xs={12} sm={2}>
-          <TextField
-            required
-            name="term"
-            label="Term"
-            value={form.term}
-            onChange={handleChange}
-            fullWidth
-          />
-        </Grid>
-
-        <Grid xs={12} sm={2}>
-          <TextField
-            required
-            name="year"
-            label="Year"
-            type="number"
-            value={form.year}
-            onChange={handleChange}
-            fullWidth
-          />
-        </Grid>
-
-        <Grid xs={12} sm={3}>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            {initialData ? "Update Mark" : "Add Mark"}
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </Box>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </Paper>
   );
 };

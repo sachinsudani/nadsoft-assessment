@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/axios";
@@ -17,18 +18,21 @@ const StudentEditPage: React.FC = () => {
     fetchData();
   }, [id]);
 
-  const handleSubmit = async (data: any) => {
-    await api.put(`/student/${id}`, data);
-    navigate("/");
-  };
-
   if (!student) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h2>Edit Student</h2>
-      <StudentForm initialData={student} onSubmit={handleSubmit} />
-    </div>
+    <Box sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
+      <Typography variant="h4" fontWeight={600} align="center" mb={3}>
+        Edit Student
+      </Typography>
+      <StudentForm
+        initialData={student}
+        mode="edit"
+        onResult={({ success }) => {
+          if (success) navigate("/");
+        }}
+      />
+    </Box>
   );
 };
 

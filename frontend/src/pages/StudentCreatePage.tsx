@@ -1,21 +1,23 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api/axios";
 import StudentForm from "../components/StudentForm";
 
 const StudentCreatePage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = async (data: any) => {
-    await api.post("/student", data);
-    navigate("/");
-  };
-
   return (
-    <div>
-      <h2>Create Student</h2>
-      <StudentForm onSubmit={handleSubmit} />
-    </div>
+    <Box sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
+      <Typography variant="h4" fontWeight={600} align="center" mb={3}>
+        Create Student
+      </Typography>
+      <StudentForm
+        mode="create"
+        onResult={({ success }) => {
+          if (success) navigate("/");
+        }}
+      />
+    </Box>
   );
 };
 
