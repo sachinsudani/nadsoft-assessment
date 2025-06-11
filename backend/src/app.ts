@@ -5,6 +5,7 @@ import helmet from "helmet";
 import { errorHandler } from "./middlewares/error.middleware";
 import markRouter from "./routes/mark/v1/mark.routes";
 import studentRouter from "./routes/student/v1/student.routes";
+import subjectRouter from "./routes/subject/v1/subject.routes";
 
 const app: Express = express();
 
@@ -16,6 +17,7 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
 app.use("/api/v1/student", studentRouter);
+app.use("/api/v1/subject", subjectRouter);
 app.use("/api/v1/mark", markRouter);
 
 app.use(errorHandler);
