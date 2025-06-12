@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/axios";
@@ -18,7 +18,13 @@ const StudentEditPage: React.FC = () => {
     fetchData();
   }, [id]);
 
-  if (!student) return <div>Loading...</div>;
+  if (!student)
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 300 }}>
+        <Typography component="span" sx={{ position: 'absolute', opacity: 0 }}>Loading...</Typography>
+        <CircularProgress size={48} />
+      </Box>
+    );
 
   return (
     <Box sx={{ maxWidth: 600, mx: "auto", mt: 4 }}>
