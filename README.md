@@ -1,4 +1,4 @@
-# 🎓 Nadsoft Full Stack Assessment
+# 🎓 Student Management System
 
 A full-stack **Student Management System** built with modern web technologies. This application allows managing students, subjects, and their marks through a clean, responsive interface and a scalable backend.
 
